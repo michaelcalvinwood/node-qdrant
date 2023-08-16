@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
 const handleCreateOpenAICollection = async (req, res) => {
     let { collectionName, diskBased } = req.body;
     if (typeof diskBased === 'undefined') diskBased = false;
-    const result = qdrant.createOpenAICollection(collectionName, diskBased);
+    console.log('collectionName', collectionName);
+    const result = await qdrant.createOpenAICollection(collectionName, diskBased);
     return res.status(200).json(result);
 }
 
