@@ -24,7 +24,13 @@ exports.createCollection = async (collectionName, size, onDiskPayload = false, d
 
     if (onDiskPayload) request.data.on_disk_payload = true;
         
-    return axios(request);   
+    try {
+        const response = axios(request);
+        console.log(response.data);   
+    } catch(err) {
+        console.error(err);
+        return false;
+    }
 }
 
 exports.createOpenAICollection = async (collectionName, diskBased = false) => {
