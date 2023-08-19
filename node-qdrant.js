@@ -28,8 +28,16 @@ const handleCreateOpenAICollection = async (req, res) => {
     return res.status(200).json(result);
 }
 
+const deleteCollection = async (req, res) => {
+    const { collectionName } = req.body;
+
+    const result = await qdrant.deleteCollection(collectionName);
+    return res.status(200).json(result);
+}
+
 
 app.post('/createOpenAICollection', (req, res) => handleCreateOpenAICollection(req, res));
+app.post('/deleteCollection', (req, res) => handleCreateOpenAICollection(req, res));
 
 const httpsServer = https.createServer({
     key: fs.readFileSync(privateKeyPath),
